@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arquitectura Empresarial - Banco Digital</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7fb;
+      color: #1f2933;
+    }
+
+    /* BARRA SUPERIOR */
+    header {
+      background: linear-gradient(90deg, #071a2d, #0b3d5c, #0f766e);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+    }
+
+    header h1 {
+      font-size: 1.8em;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background: #d4af37;
+      color: #071a2d;
+      transform: translateY(-2px);
+    }
+
+    /* PORTADA */
+    .hero {
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 25px;
+      color: white;
+      background:
+        linear-gradient(rgba(7,26,45,0.82), rgba(15,118,110,0.72)),
+        url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    }
+
+    .hero h2 {
+      font-size: 2.8em;
+      margin-bottom: 18px;
+      color: #f8fafc;
+    }
+
+    .hero p {
+      max-width: 850px;
+      font-size: 1.15em;
+      line-height: 1.8;
+      background: rgba(255,255,255,0.12);
+      padding: 18px 24px;
+      border-radius: 18px;
+      backdrop-filter: blur(4px);
+    }
+
+    main {
+      max-width: 1150px;
+      margin: -45px auto 0;
+      padding: 30px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    section {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 34px;
+      margin-bottom: 32px;
+      box-shadow: 0 12px 28px rgba(7,26,45,0.12);
+      border: 1px solid #e5eaf0;
+    }
+
+    section:hover {
+      box-shadow: 0 16px 35px rgba(7,26,45,0.18);
+    }
+
+    h2 {
+      color: #071a2d;
+      margin-bottom: 18px;
+      font-size: 1.7em;
+      display: inline-block;
+      border-bottom: 4px solid #d4af37;
+      padding-bottom: 8px;
+    }
+
+    p, li {
+      line-height: 1.75;
+      font-size: 1.02em;
+    }
+
+    ul, ol {
+      margin-left: 25px;
+      margin-top: 12px;
+    }
+
+    /* TARJETAS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+      margin-top: 25px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #f8fafc, #eef7f6);
+      border: 1px solid #d9e6e4;
+      border-top: 5px solid #0f766e;
+      padding: 24px;
+      border-radius: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 22px rgba(15,118,110,0.18);
+    }
+
+    .card h3 {
+      color: #0b3d5c;
+      margin-bottom: 10px;
+      font-size: 1.25em;
+    }
+
+    /* IMÁGENES */
+    img {
+      width: 100%;
+      border-radius: 18px;
+      margin-top: 18px;
+      background: #ffffff;
+      padding: 12px;
+      border: 1px solid #d8dee8;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.13);
+      transition: all 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.015);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    }
+
+    /* SECCIÓN CONCLUSIONES */
+    #conclusiones {
+      background: linear-gradient(135deg, #071a2d, #0b3d5c);
+      color: white;
+    }
+
+    #conclusiones h2 {
+      color: white;
+      border-bottom-color: #d4af37;
+    }
+
+    #conclusiones li {
+      margin-bottom: 8px;
+    }
+
+    /* REFERENCIAS */
+    #referencias {
+      background: #f8fafc;
+    }
+
+    footer {
+      text-align: center;
+      color: white;
+      padding: 28px 20px;
+      background: linear-gradient(90deg, #071a2d, #0b3d5c);
+      margin-top: 40px;
+    }
+
+    footer span {
+      color: #d4af37;
+      font-weight: bold;
+    }
+
+    @media (max-width: 700px) {
+      .hero h2 {
+        font-size: 2em;
+      }
+
+      section {
+        padding: 24px;
+      }
+
+      header h1 {
+        font-size: 1.4em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Arquitectura Empresarial - Banco Digital</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#explicacion">Explicación</a>
+      <a href="#archimate">Diagrama ArchiMate</a>
+      <a href="#mapa">Mapa de TI</a>
+      <a href="#conclusiones">Conclusiones</a>
+      <a href="#referencias">Referencias</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2>Transformación Digital Bancaria</h2>
+    <p>
+      Este sitio presenta una propuesta de arquitectura empresarial para un banco,
+      integrando procesos de negocio, aplicaciones financieras, infraestructura
+      tecnológica, seguridad y canales digitales.
+    </p>
+  </div>
+
+  <main>
+
+    <section id="inicio">
+      <h2>Inicio</h2>
+      <p>
+        El proyecto de Arquitectura Empresarial aplicado a un banco permite visualizar
+        cómo se relacionan los actores principales, los servicios financieros, las
+        aplicaciones bancarias y la infraestructura tecnológica que soporta la operación.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Clientes</h3>
+          <p>Usuarios que realizan consultas, pagos, transferencias y operaciones digitales.</p>
+        </div>
+
+        <div class="card">
+          <h3>Servicios Bancarios</h3>
+          <p>Apertura de cuentas, pagos, transferencias, consultas y gestión de productos.</p>
+        </div>
+
+        <div class="card">
+          <h3>Tecnología</h3>
+          <p>Core bancario, API Gateway, bases de datos, nube, firewall y respaldo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="explicacion">
+      <h2>Explicación guiada</h2>
+      <p>
+        En este caso, TOGAF se utiliza como marco de referencia para organizar la
+        arquitectura empresarial del banco. ArchiMate permite representar gráficamente
+        la relación entre la capa de negocio, la capa de aplicación y la capa tecnológica.
+      </p>
+
+      <ul>
+        <li><strong>Capa de negocio:</strong> cliente, cajero, ejecutivo de cuenta y administrador.</li>
+        <li><strong>Capa de aplicación:</strong> servicios de cuentas, transferencias, pagos y consultas.</li>
+        <li><strong>Capa tecnológica:</strong> core bancario, sistema de pagos, bases de datos, servidores y nube.</li>
+      </ul>
+    </section>
+
+    <section id="archimate">
+      <h2>Diagrama ArchiMate del Banco</h2>
+      <p>
+        El siguiente diagrama muestra la relación entre los actores del banco,
+        los servicios digitales y los sistemas tecnológicos que permiten operar
+        los procesos financieros.
+      </p>
+
+      <img src="diagrama1.png" alt="Diagrama ArchiMate Banco">
+    </section>
+
+    <section id="mapa">
+      <h2>Mapa de Arquitectura de TI</h2>
+      <p>
+        El mapa de TI presenta la estructura tecnológica que soporta la banca digital,
+        incluyendo sistemas centrales, seguridad, almacenamiento, respaldo, nube y
+        administración de usuarios.
+      </p>
+
+      <img src="diagrama2.png" alt="Mapa de TI Banco">
+    </section>
+
+    <section id="conclusiones">
+      <h2>Conclusiones</h2>
+      <ul>
+        <li>La arquitectura empresarial permite alinear los procesos bancarios con la tecnología.</li>
+        <li>El API Gateway facilita la integración segura entre canales digitales y sistemas internos.</li>
+        <li>El core bancario es fundamental para gestionar cuentas, pagos y transacciones.</li>
+        <li>La infraestructura tecnológica garantiza seguridad, disponibilidad y continuidad del servicio.</li>
+      </ul>
+    </section>
+
+    <section id="referencias">
+      <h2>Referencias</h2>
+      <ol>
+        <li>The Open Group. (2021). <em>ArchiMate® 3.2 Specification</em>.</li>
+        <li>The Open Group. (2018). <em>TOGAF® Standard, Version 9.2</em>.</li>
+        <li>ISO/IEC/IEEE 42010:2011. <em>Software and Systems Engineering — Architecture Description</em>.</li>
+        <li>Material del curso - Arquitectura Empresarial.</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Proyecto desarrollado por <span>Christiam Chaparro</span> | Arquitectura Empresarial - Banco Digital</p>
+  </footer>
+
+</body>
+</html>
